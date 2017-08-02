@@ -11,6 +11,7 @@ function retreive() {
 
             var imagesDb = data.collection('images');
             imagesDb.find({}).toArray().then(function (data) {
+                console.log(data)
                 res.render('homepage', {data: data});
             })
         });

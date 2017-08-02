@@ -32,21 +32,25 @@
         </form>
     </div>
 </nav>
+<div align="center">
 Add a post here.
 <form action="/upload" method="POST" enctype="multipart/form-data">
     <input type="file"  name="avatar" ><br>
     <input type="text" name="story"><br>
     <input type="submit" value="Submit">
 </form>
-
+<hr/>
 <!--<img src="uploa‌​ds/avatar-1501541056‌​425.png">-->
 
-
+<div class="container">
 {{#each data as |post|}}
+
+    <img  src= "{{post.image}}" height="250"  ><br>
     {{ post.story }}
-    <img  src= "{{post.image}}" height="150"  >
     <br>
 {{/each}}
+</div>
+</div>
 </body>
 </html>
 

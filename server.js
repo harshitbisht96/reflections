@@ -16,6 +16,7 @@ const homeRoute=require('./routes/home');
 const loginRoute=require('./routes/login');
 const registerRoute=require('./routes/register');
 const passport=require('./passport')
+const profileRoute=require('./routes/profile')
 var db=require('./database.js');
 
 app.use(cp('somesecret'));
@@ -102,11 +103,10 @@ function checkLoggedIn(req, res, next) {
 
     }
 }
-
+app.use('/profile',profileRoute)
 app.use('/posts',checkLoggedIn,homeRoute);
 app.use('/register',registerRoute);
 app.use('/login',loginRoute);
-
 
 
 app.post('/upload', function (req, res) {
@@ -145,7 +145,7 @@ app.post('/users', function (req, res) {
 
         db.then(function(data){
             var userCollection=data.collection('users');
-            userCollection.insert({username: req.body.username, password: req.body.password,profileImage:fileName}).then(function(){
+            userCollection.insert({username: req.body.username, password: req.body.password,profileImage:userImageFileName}).then(function(){
                 console.log("fucked");
             })
         });
