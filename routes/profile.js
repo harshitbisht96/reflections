@@ -1,23 +1,18 @@
 /**
  * Created by harshitbisht96 on 2/8/17.
  */
-const express=require('express');
+
 var db=require('../database.js');
+const express=require('express');
 const route=require('express').Router();
-function retreive() {
-    route.get('/:username', function (req, res) {
-        console.log("profile")
+    route.get('/:id', function (req, res) {
         db.then(function (data) {
-            var username=req.params.username;
-            console.log(username)
-            var userCollection = data.collection('users');
-            userCollection.find({username:username}).toArray().then(function (data) {
-                console.log(data)
-                res.render('profile', {data: data});
+            var username=req.params.id;
+            var usersDb = data.collection('users');
+            usersDb.findOne({username:username}).then(function (data) {
+                var image=data.image;
+                res.render('userprofile', {data: data,image:image});
             })
         });
     });
-
-    return route
-}
-module.exports=retreive()
+module.exports=route

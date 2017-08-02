@@ -35,8 +35,9 @@ app.set('view engine', 'hbs');
 // app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 // app.engine('html', require('ejs').renderFile);
+app.use('/profile/',express.static(__dirname + '/userImages'));
 app.use(express.static(__dirname + '/uploads'));
-app.use(express.static(__dirname + '/userImages'));
+
 
 
 
@@ -77,7 +78,7 @@ var userImageStorage = multer.diskStorage({
 filePath=path.join(__dirname,'uploads/');
 filePath+=fileName;
 var upload = multer({ storage: storage }).single('avatar')
-var uploadUserImage = multer({ storage: userImageStorage }).single('profile');
+var uploadUserImage = multer({ storage: userImageStorage }).single('avatar');
 
 
 app.use(bp.json());
@@ -145,7 +146,7 @@ app.post('/users', function (req, res) {
 
         db.then(function(data){
             var userCollection=data.collection('users');
-            userCollection.insert({username: req.body.username, password: req.body.password,profileImage:userImageFileName}).then(function(){
+            userCollection.insert({"username": req.body.username, "password": req.body.password,"image":userImageFileName}).then(function(){
                 console.log("fucked");
             })
         });
