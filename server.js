@@ -37,7 +37,7 @@ app.set('views', __dirname + '/views');
 // app.engine('html', require('ejs').renderFile);
 app.use('/profile/',express.static(__dirname + '/userImages'));
 app.use(express.static(__dirname + '/uploads'));
-
+app.use(express.static(__dirname + '/bootstrap'));
 
 
 
@@ -94,9 +94,14 @@ app.use(cp());
 //
 // });
 
+
 function checkLoggedIn(req, res, next) {
-    console.log('check logged in');
+    console.log('check logged in 2');
+    console.log(req.user)
     if (req.user) {
+        console.log(req.user)
+        console.log("User now logged in")
+        // res.redirect('/posts');
         next();
     } else {
 
@@ -104,10 +109,21 @@ function checkLoggedIn(req, res, next) {
 
     }
 }
+app.get('/', function(req,res,next){
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    console.log('check logged in 1');
+    console.log(req.user)
+    if(req.user){
+        res.redirect('/posts');
+    }
+    else{
+        next();
+    }
+});
 app.use('/profile',profileRoute)
 app.use('/posts',checkLoggedIn,homeRoute);
 app.use('/register',registerRoute);
-app.use('/login',loginRoute);
+app.use('/',loginRoute);
 
 
 app.post('/upload', function (req, res) {
@@ -150,7 +166,7 @@ app.post('/users', function (req, res) {
                 console.log("fucked");
             })
         });
-        res.redirect('/login');
+        res.redirect('/');
 
     })
 
@@ -161,12 +177,13 @@ app.post('/users', function (req, res) {
 
     // res.send("Yo")
 app.post('/login', passport.authenticate('local', {
-        failureRedirect: '/login',
-        successRedirect: '/posts'
+        failureRedirect: '/',
+        successRedirect: '/posts',
+
     }),
 );
-
-
+// passport.authenticate('local', { failureFlash: 'Invalid username or password.' });
+// passport.authenticate('local', { successFlash: 'Welcome!' });
 app.listen(1111,function(){
     console.log("app running at http://localhost:1111");
 });
