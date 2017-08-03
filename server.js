@@ -35,8 +35,11 @@ app.set('view engine', 'hbs');
 // app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 // app.engine('html', require('ejs').renderFile);
+app.use('/posts/',express.static(__dirname + '/userImages'));
+app.use('/posts/',express.static(__dirname + '/uploads'));
 app.use('/profile/',express.static(__dirname + '/userImages'));
 app.use(express.static(__dirname + '/uploads'));
+
 app.use(express.static(__dirname + '/bootstrap'));
 
 
@@ -139,7 +142,7 @@ app.post('/upload', function (req, res) {
         db.then(function(data){
            var postStory=req.body.story;
             var imageCollection=data.collection('images');
-           imageCollection.insert({"image":fileName,"story":postStory,"postedBy":req.user}).then(function(){
+           imageCollection.insert({"image":fileName,"story":postStory,"postedBy":req.user.username,"postedByImage":req.user.image}).then(function(){
                 console.log("Success");
             })
         });
@@ -162,7 +165,7 @@ app.post('/users', function (req, res) {
 
         db.then(function(data){
             var userCollection=data.collection('users');
-            userCollection.insert({"username": req.body.username, "password": req.body.password,"image":userImageFileName}).then(function(){
+            userCollection.insert({"firstname": req.body.firstname, "lastname": req.body.lastname, "age":req.body.age, "city":req.body.city, "username":req.body.username, "password":req.body.password, "description":req.body.description, "image":userImageFileName}).then(function(){
                 console.log("fucked");
             })
         });

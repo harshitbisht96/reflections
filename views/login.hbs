@@ -17,10 +17,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="community.html"><i class="fa fa-users" aria-hidden="true">Community </i><span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="community.html"><i class="fa fa-users" aria-hidden="true"> </i><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="posts.html"><i class="fa fa-newspaper-o" aria-hidden="true">Posts</i> <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="posts.html"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="sr-only">(current)</span></a>
             </li>
 
         </ul>
@@ -55,17 +55,32 @@
 
         <div class='col-md-4'>
             <h3 id='accountHeading'><b>Create an account </b></h3><br>
-            <form action="/login" method="post" >
+            <form action="/users" method="POST" enctype="multipart/form-data" >
                 <div class='row'>
-                    <div class='col-md-10'>
+                    <div class='col-md-7'>
                         <input type="text" name="firstname" id="fname" placeholder="First Name" required><br><br>
                     </div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-10'>
-                        <input type="password" name="password" placeholder="password">
+                    <div class='col-md-5'>
+                        <input type="text" name="lastname" id="lname" placeholder="Last Name" required><br><br>
                     </div>
                 </div>
+                <div class='row'>
+                    <div class='col-md-7'>
+                        <input type="text" name="age" id="age" placeholder="Age" required><br><br>
+                    </div>
+                    <div class='col-md-5'>
+                        <input type="text" name="city" id="city" placeholder="City" required><br><br>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-7'>
+                        <input type="text" name="username" id="username" placeholder="username" required><br><br>
+                    </div>
+                    <div class='col-md-5'>
+                        <input type="file" name="avatar" required><br><br>
+                    </div>
+                    <input type="password"  name="password" id="password"  placeholder="Password" required><br><br>
+                    <textarea rows="4" cols="50" name="description" id="description" placeholder="A little descriptiton about yourself" required></textarea><br><br>
 
                 <input  align='center' type="submit" class="btn btn-success btn-lg btn-block" value="Create an account" >
 

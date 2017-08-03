@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/css/bootstrap.css'>
+    <script src="/js/jquery.js" charset="utf-8"></script>
+    <script src="/js/bootstrap.js" charset="utf-8"></script>
     <style>
         div.gallery {
             margin-left: 35%;
@@ -49,30 +50,48 @@
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>
+
         </ul>
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
+            <input class="form-control mr-sm-2" type="file"  name="avatar" >
+            <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
+            <input class="form-control mr-sm-2" type="submit" value="Submit">
+        </form>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>
-<div align="center">
-Share something
-</div>
-<form action="/upload" method="POST" enctype="multipart/form-data">
-    <input type="file"  name="avatar" ><br>
-    <input type="text" name="story"><br>
-    <input type="submit" value="Submit">
-</form>
-<hr/>
+
+<!--<div align="center">-->
+<!--Share something-->
+<!--</div>-->
+<!--<form action="/upload" method="POST" enctype="multipart/form-data">-->
+    <!--<input type="file"  name="avatar" ><br>-->
+    <!--<input type="text" name="story"><br>-->
+    <!--<input type="submit" value="Submit">-->
+<!--</form>-->
+<!--<hr/>-->
 <!--<img src="uploa‌​ds/avatar-1501541056‌​425.png">-->
 
 
 {{#each data as |post|}}
 
-    <div class="gallery">
-        <div class="desc">{{ post.story }}</div>
-        <img  src= "{{post.image}}" height="500" >
+    <div class="gallery" align="center">
+        <div class="desc">
+            <div class="row">
+                <div class="col-md-2">
+                <img class="rounded-circle" src="/profile/{{post.postedByImage}}" height="75" >
+                </div>
+                <div class="col-md-8">
+                   <a href="/profile/{{post.postedBy}}">{{ post.postedBy }}</a>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <a href="/posts/{{post._id}}"><img  src= "{{post.image}}" height="400"  ></a>
+        <hr/>
         <div class="desc">{{ post.story }}</div>
     </div>
 

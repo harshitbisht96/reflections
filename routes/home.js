@@ -17,6 +17,18 @@ function retreive() {
             })
         });
     });
+    route.get('/:id', function (req, res) {
+        db.then(function (data) {
+            var postId= req.params.id;
+            var imagesDb = data.collection('images');
+            var ObjectID=require('mongodb').ObjectID;
+            console.log(postId)
+            imagesDb.findOne({ _id : new ObjectID(postId)}).then(function (data) {
+                console.log(data)
+                res.render('postpage',{data:data});
+            })
+        });
+    });
     return route
 }
 module.exports=retreive()
