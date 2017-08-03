@@ -176,7 +176,18 @@ app.post('/users', function (req, res) {
 
 });
 
-
+app.post('/comment',function(req,res){
+    // console.log(req.body.postId);
+    // console.log(req.body.comment)
+    db.then(function(data){
+         var commentsCollection=data.collection('comments');
+         var newComment=({body:req.body.comment,post:req.body.postId,by:req.user.username})  ;
+         commentsCollection.insert(newComment).then(function(){
+             console.log("comment added");
+         })
+    });
+    res.redirect('/posts/'+req.body.postId);
+})
 
     // res.send("Yo")
 app.post('/login', passport.authenticate('local', {

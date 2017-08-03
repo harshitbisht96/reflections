@@ -21,11 +21,15 @@ function retreive() {
         db.then(function (data) {
             var postId= req.params.id;
             var imagesDb = data.collection('images');
+            var commentsDb=data.collection('comments');
             var ObjectID=require('mongodb').ObjectID;
             console.log(postId)
             imagesDb.findOne({ _id : new ObjectID(postId)}).then(function (data) {
-                console.log(data)
-                res.render('postpage',{data:data});
+                commentsDb.find({post:postId}).toArray().then(function(commentsData){
+                    console.log(commentsData.length);
+                    res.render('postpage',{data:data,commentsData:commentsData});
+                })
+
             })
         });
     });
