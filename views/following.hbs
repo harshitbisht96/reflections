@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Postpage</title>
+    <title>Following</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
+    <!--<link rel='stylesheet' href='/homepage.css'>-->
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
 </head>
 <body>
-<nav id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
+<nav id='nav' class="navbar  fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -63,22 +64,13 @@
     </div>
 </nav>
 <br>
-<div align="center">
-<img  src= "{{data.image}}" height="400"  ><br>
-    <font size="5">{{data.story}}</font>
-    <hr/>
-<form action="/comment" method="POST" >
-    <input  type="text" name="comment" placeholder="Comment here" size="40">
-    <input type="hidden" name="postId" value={{data._id}} />
-    <input class=" btn btn-info" type="submit" value="Add Comment">
-</form>
-    <br>
-    {{#each commentsData as |comment|}}
-        <div class="well">
-           <font size="4"> <a href="/profile/{{comment.by}}">{{comment.by}} </a> {{comment.body}} </font>
-        </div>
+<h2 align="center">Users following {{userName}}</h2>
 
-    {{/each}}
-</div>
+{{#each followingArray as |follow|}}
+    <p align="center">
+        <a href="/profile/{{follow}}">{{follow}}</a>
+        <br></p>
+{{/each}}
+
 </body>
 </html>

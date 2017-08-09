@@ -9,6 +9,21 @@ const session = require('express-session')
 const cp = require('cookie-parser');
 var hbs = require('hbs');
 var ejs = require('ejs');
+var db=require('./database.js');
+var flash = require('connect-flash');
+
+var mongodb=require('mongodb');
+var MongoClient=mongodb.MongoClient;
+var url='mongodb://localhost:27017/imageDatabase';
+
+function getDb(){
+    // console.log('shimla')
+    return MongoClient.connect(url).then(function (db) {
+        // console.log(MongoClient.connect(url));
+        return db;
+    })
+}
+
 const app=express();
 const multer=require('multer');
 const mongo=require('mongodb');
@@ -17,19 +32,18 @@ const loginRoute=require('./routes/login');
 const registerRoute=require('./routes/register');
 const passport=require('./passport')
 const profileRoute=require('./routes/profile')
-var db=require('./database.js');
-
+// const usersRoute=require('./routes/users')
+app.use(flash());
 app.use(cp('somesecret'));
 app.use(session({
     secret: 'somesecret',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+
 }));
 app.use(bp.urlencoded({extended: true}))
-app.use(bp.json())
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(bp.json());
+app.use(cp())
 
 app.set('view engine', 'hbs');
 // app.set('view engine', 'html');
@@ -38,10 +52,21 @@ app.set('views', __dirname + '/views');
 app.use('/posts/',express.static(__dirname + '/userImages'));
 app.use('/posts/',express.static(__dirname + '/uploads'));
 app.use('/profile/',express.static(__dirname + '/userImages'));
+app.use('/profile/',express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname + '/uploads'));
-
+app.use(express.static(__dirname + '/styles'));
+app.use(express.static(__dirname + '/static_images'));
+app.use('/posts/',express.static(__dirname + '/static_images'));
+app.use(express.static(__dirname + '/js_frontend'));
 app.use(express.static(__dirname + '/bootstrap'));
 
+
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 
 console.log(__dirname + '/uploads/');
@@ -53,7 +78,6 @@ var userImageFileName
 // const gfs = Grid(db, mongo);
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log("Working")
         cb(null, './uploads/');
     },
     filename: function (req, file, cb) {
@@ -66,11 +90,9 @@ var storage = multer.diskStorage({
 });
 var userImageStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log("ha");
         cb(null, './userImages/');
     },
     filename: function (req, file, cb) {
-        console.log("he")
         file2upload=file.originalname;
         userImageFileName=file.fieldname + '-' + Date.now()+'.'+file.mimetype.toString().split("/")[1];
         cb(null, userImageFileName);
@@ -84,9 +106,7 @@ var upload = multer({ storage: storage }).single('avatar')
 var uploadUserImage = multer({ storage: userImageStorage }).single('avatar');
 
 
-app.use(bp.json());
-app.use(bp.urlencoded());
-app.use(cp());
+;
 
 // gfs.files.find({ aliases: 2 }).toArray(function (err, files) {
 //     if (err) {
@@ -99,23 +119,18 @@ app.use(cp());
 
 
 function checkLoggedIn(req, res, next) {
-    console.log('check logged in 2');
-    console.log(req.user)
+
     if (req.user) {
-        console.log(req.user)
-        console.log("User now logged in")
         // res.redirect('/posts');
         next();
     } else {
 
-        res.status(404).send('Unauthorised')
+        res.redirect('/')
 
     }
 }
 app.get('/', function(req,res,next){
     res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-    console.log('check logged in 1');
-    console.log(req.user)
     if(req.user){
         res.redirect('/posts');
     }
@@ -123,17 +138,27 @@ app.get('/', function(req,res,next){
         next();
     }
 });
-app.use('/profile',profileRoute)
+
+app.use('/',loginRoute);
+app.use('/profile/',checkLoggedIn,profileRoute)
+// app.use('/users',usersRoute);
 app.use('/posts',checkLoggedIn,homeRoute);
 app.use('/register',registerRoute);
-app.use('/',loginRoute);
-
-
+app.get('/exists',function(req,res){
+    res.send("Username not available.Please create an account under different username.");
+})
 app.post('/upload', function (req, res) {
-
+    // console.log(req.body.avatar)
+    // if(req.body.avatar==undefined)
+    // {
+    //     console.log(req.body.avatar)
+    //    res.redirect('/posts');
+    //    return;
+    // }
     upload(req, res, function (err) {
 
         if (err) {
+
             // An error occurred when uploading
             console.log(err);
             return;
@@ -165,11 +190,22 @@ app.post('/users', function (req, res) {
 
         db.then(function(data){
             var userCollection=data.collection('users');
-            userCollection.insert({"firstname": req.body.firstname, "lastname": req.body.lastname, "age":req.body.age, "city":req.body.city, "username":req.body.username, "password":req.body.password, "description":req.body.description, "image":userImageFileName}).then(function(){
-                console.log("fucked");
+            userCollection.findOne({'username': req.body.username}, function(err, user) {
+                if(user)
+                {
+                    res.redirect('/exists');
+                }
+                else{
+                    userCollection.insert({"firstname": req.body.firstname, "lastname": req.body.lastname, "age":req.body.age, "city":req.body.city, "username":req.body.username, "password":req.body.password, "description":req.body.description, "image":userImageFileName,"followers":[],"following":[]}).then(function(){
+                        res.redirect('/');
+                    })
+                }
             })
+
+
+
         });
-        res.redirect('/');
+
 
     })
 
@@ -181,21 +217,102 @@ app.post('/comment',function(req,res){
     // console.log(req.body.comment)
     db.then(function(data){
          var commentsCollection=data.collection('comments');
-         var newComment=({body:req.body.comment,post:req.body.postId,by:req.user.username})  ;
+         var newComment=({body:req.body.comment,post:req.body.postId,by:req.user.username});
          commentsCollection.insert(newComment).then(function(){
-             console.log("comment added");
+             // console.log("comment added");
+            commentsCollection.find({}).toArray().then(function(data){
+                // console.log(data.length)
+            })
          })
     });
     res.redirect('/posts/'+req.body.postId);
-})
+});
+
+//Problem in this part of the code
+app.post('/addFollower',function(req,res){
+    db.then(function(data){
+           var userCollection=data.collection('users');
+           userCollection.update({"username":req.user.username},{$addToSet:{"following":req.body.followWho}},function(err,result){
+               if(err){
+                   console.log(err);
+                   return;
+               }
+               userCollection.update({"username":req.body.followWho},{$addToSet:{"followers":req.user.username}},function(err,result){
+                   if(err){
+                       console.log(err);
+                       return;
+                   }
+                   // console.log("User followed");
+                   // console.log(req.user);
+                   res.redirect('/profile/'+req.body.followWho)
+//                    user.save(function(err) {
+//                        if (err) return next(err)
+// // What's happening in passport's session? Check a specific field...
+//                        console.log("Before relogin: "+req.session.passport.user.changedField)
+//
+//                        req.login(user, function(err) {
+//                            if (err) return next(err)
+//
+//                            console.log("After relogin: "+req.session.passport.user.changedField)
+//                            res.send(200)
+//                        })
+//                    })
+
+
+
+               });
+           });
+           // userCollection.findOne({"username":req.user.username}).then(function(data){
+           //     {"$set":{"G":1}},
+           //         console.log(req.user),
+           //         res.redirect('/')
+           //
+           // })
+
+
+        //     var followWho=req.body.followWho;
+        //     var username=req.user.username;
+        // userCollection.update(
+        //     { "username" :username},
+        //     {
+        //        " $push" :{
+        //             { followWho : 1}
+        //         }
+        //     },
+        // );
+
+    });
+
+});
+
+
 
     // res.send("Yo")
 app.post('/login', passport.authenticate('local', {
-        failureRedirect: '/',
+
         successRedirect: '/posts',
+        failureRedirect: '/',
+        badRequestMessage : 'Missing username or password.',
+        failureFlash: true
 
     }),
+
 );
+
+app.get('/logout',function(req,res){
+    req.session.destroy(function(err){
+        if(err){
+            console.log(err);
+        }
+        console.log("Successfully logged out")
+        res.redirect('/');
+    })
+})
+
+
+app.use('/',function(req,res){
+    res.render("notfound");
+});
 // passport.authenticate('local', { failureFlash: 'Invalid username or password.' });
 // passport.authenticate('local', { successFlash: 'Welcome!' });
 app.listen(1111,function(){

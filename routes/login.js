@@ -3,9 +3,8 @@
  */
 
 const express=require('express');
-console.log("Login route")
 const route=require('express').Router();
 route.get('/',function(req,res){
-    res.render('login');
+    res.render('login',{ message: req.flash('message')}) ;
 })
 module.exports=route

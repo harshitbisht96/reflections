@@ -6,12 +6,14 @@ var MongoClient=mongodb.MongoClient;
 var url='mongodb://localhost:27017/imageDatabase';
 
 function getDb(){
-
-    return MongoClient.connect(url).then(function (db) {
+     return MongoClient.connect(url).then(function (db) {
         // console.log(MongoClient.connect(url));
         return db;
     })
 }
+
+
+
 
 module.exports=getDb();
 

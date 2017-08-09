@@ -7,43 +7,83 @@ const db=require('./database.js');
 var users;
 
 passport.serializeUser(function (user, done) {
-    console.log('serialization started...');
-    console.log(user.pos)
-    done(null, user.pos)
+
+    done(null, user.username)
 
 });
+passport.deserializeUser(function (username, done) {
+db.then(function(data){
+    var Users=data.collection('users');
 
-passport.deserializeUser(function (userId, done) {
-    console.log('deserialization started');
-    done(null, users[userId]);
-});
+        Users.findOne({"username": username}, function(err, user) {
+            done(err, user);
+        });
+    });
+})
 
-const localStrategy = new LocalStrategy(
-    function (username, password, done) {
+
+// const localStrategy = new LocalStrategy({
+//         passReqToCallback : true
+//     },
+//     function (req,username, password, done) {
+//         db.then(function(data){
+//             var Users=data.collection('users');
+//             Users.find({}).toArray().then(function(data){
+//                 users=data;
+//                 console.log(users.length)
+//                 for (var i=0;i<users.length;i++) {
+//                     if (users[i].username == username) {
+//                         console.log('One of users')
+//                         if (users[i].password == password) {
+//                             console.log(i)
+//                             console.log("Authentic User")
+//                             users[i].pos= i;
+//                             done(null, users[i])
+//                         } else {
+//                             console.log("wrong password")
+//                             done(null, false, req.flash('loginMessage','Invalid username or password'))
+//                         }
+//                     }
+//                 }
+//                 done(null, false, req.flash('loginMessage','Invalid username or password'))
+//             });
+//         })
+//     });
+// console.log("Yo");
+
+
+
+passport.use('local', new LocalStrategy({
+        passReqToCallback : true
+    },
+    function(req,username, password,done) {
+    process.nextTick(function() {
         db.then(function(data){
             var Users=data.collection('users');
-            Users.find({}).toArray().then(function(data){
-                users=data;
-                console.log(users.length)
-                for (var i=0;i<users.length;i++) {
-                    if (users[i].username == username) {
-                        console.log('One of users')
-                        if (users[i].password == password) {
-                            console.log(i)
-                            console.log("Authentic User")
-                            users[i].pos= i;
-                            done(null, users[i])
-                        } else {
-                            console.log("wrong password")
-                            done(null, false, {message: 'Wrong password'})
-                        }
-                    }
-                }
-                done(null, false, {message: 'User not found'})
-            });
-        })
-    });
-console.log("Yo");
+            Users.findOne({'username': username}, function(err, user) {
 
-passport.use(localStrategy);
+                if (err) {
+                    throw err;
+                     done(null,false,req.flash('message','Invalid username or password'));
+                }
+                if (!user) {
+                     done(null, false,req.flash('message','Invalid username or password'));
+                }
+                if(user!=null) {
+                    if (user.password != password) {
+                        done(null, false, req.flash('message', 'Wrong Password'));
+                    }
+                    done(null, user);
+                }
+                else{
+                   return;
+                }
+            });
+
+        })
+
+    });
+}));
+
+// passport.use(localStrategy);
 module.exports=passport;

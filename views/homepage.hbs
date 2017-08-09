@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
+    <!--<link rel='stylesheet' href='/homepage.css'>-->
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
     <style>
@@ -13,8 +14,8 @@
             margin-bottom: 2%;
             border: 1px solid #ccc;
             float: left;
-            padding-left: 3%;
-            padding-right: 3%;
+            padding-left: 0%;
+            padding-right: 0%;
             padding-top: 0%;
             padding-bottom: 0%;
             /*width: 180px;*/
@@ -27,40 +28,66 @@
         /*}*/
 
         div.desc {
-            padding: 15px;
+            padding: 2px;
             text-align: center;
         }
+
     </style>
 </head>
 <body>
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Reflections</a>
+    <a id='heading' class="navbar-brand" href="/">PicBook</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/profile/all">Users</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+
 
         </ul>
         <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
-            <input class="form-control mr-sm-2" type="file"  name="avatar" >
-            <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
+            <input class="form-control mr-sm-2" type="file"  name="avatar" required >
+            <input class="form-control mr-sm-2" type="text" name="story" placeholder="Add a memory" >
             <input  type="submit" class='btn btn-info' value="Share">
         </form>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link " href="/logout"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/logout"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/logout"></a>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+            <li class="nav-item">
+                <!--<a class="nav-link " href="/logout">Logout</a>-->
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile/{{currentUser}}"><img class="rounded-circle" src="{{userImage}}" height="25"/> {{currentUser}} <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link "  href="/logout">Logout</a>
+            </li>
+        </ul>
+
     </div>
 </nav>
 <br>
@@ -75,29 +102,42 @@
 <!--<hr/>-->
 <!--<img src="uploa‌​ds/avatar-1501541056‌​425.png">-->
 
+{{#if havingFriends}}
+    {{#each data as |post|}}
 
-{{#each data as |post|}}
-
-    <div class="gallery" align="center">
-        <div class="desc">
-            <div class="row">
-                <div class="col-md-2">
-                <img class="rounded-circle" src="/profile/{{post.postedByImage}}" height="75" >
-                </div>
-                <div class="col-md-8">
-                   <a href="/profile/{{post.postedBy}}">{{ post.postedBy }}</a>
+        <div class="gallery" align="center">
+            <div class="desc">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="/profile/{{post.postedBy}}"> <img class="rounded-circle" src="/profile/{{post.postedByImage}}" height="75" ></a>
+                    </div>
+                    <div class="col-md-8">
+                        <font size="5"> <a href="/profile/{{post.postedBy}}">{{ post.postedBy }}</a></font>
+                    </div>
                 </div>
             </div>
+            <hr/>
+            <a href="/posts/{{post._id}}"><img  src= "{{post.image}}" width="550" ></a>
+            <hr/>
+            <font size="5"><div class="desc">{{ post.story }}</div></font>
+            <a href="/posts/{{post._id}}"><i>See the comments</i></a>
         </div>
-        <hr/>
-        <a href="/posts/{{post._id}}"><img  src= "{{post.image}}" height="400"  ></a>
-        <hr/>
-        <div class="desc">{{ post.story }}</div>
+
+    {{/each}}
+
+{{else}}
+    <br>
+    <div class="container">
+        <h2 align="center">It looks kind of lonely here in here.<br>
+            &#9700 Click on the Users tab to see all the users .
+            <br>Visit there profiles if you want to follow them.
+            <br><p align="center">Add you memories here &#9650</p><p align="center">Happy Sharing :)</p>
+            <img src="/happiness.jpg" />
+            <h2 align="center">and a memory...</h2>
+
+    </h2>
     </div>
-
-{{/each}}
-
-
+{{/if}}
 </body>
 </html>
 

@@ -3,15 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
-
     <link rel='stylesheet' href='/css/bootstrap.css'>
+    <link rel='stylesheet' href='/profilepage.css'>
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
+    <script src="/profilepage.js" charset="utf-8"></script>
+    <script src="/jquery-3.2.1.min.js" charset="utf-8"></script>
 </head>
 <body>
-This is profile page
-{{data.username}}
-<img src="{{image}}"height="150" >
+<nav id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a id='heading' class="navbar-brand" href="/">PicBook</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile/all">Users</a>
+            </li>
+
+
+        </ul>
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
+            <input class="form-control mr-sm-2" type="file"  name="avatar" >
+            <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
+            <input  type="submit" class='btn btn-info' value="Share">
+        </form>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link " href="/logout"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/logout"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/logout"></a>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+            <li class="nav-item">
+                <!--<a class="nav-link " href="/logout">Logout</a>-->
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile/{{currentUser}}"><img class="rounded-circle" src="{{userImage}}" height="25"/> {{currentUser}} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link "  href="/logout">Logout</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<br>
+<!--{{#if isUser}}-->
+<!--{{else}}-->
+<!--{{#if isFollowing}}-->
+  <!--You are following him-->
+<!--{{else}}-->
+   <!--<form action="/addFollower" method="post">-->
+       <!--<input type ='submit' class="btn btn-info" value="Follow">-->
+       <!--<input type="hidden" name="followWho" value={{data.username}} />-->
+   <!--</form>-->
+   <!--{{/if}}-->
+<!--{{/if}}-->
+<!--<h3>{{data.username}} </h3>-->
+<!--<br>-->
+<!--<b>Followers:{{data.followers.length}}</b>-->
+<!--<b>Following:{{data.following.length}}</b>-->
+<!--<img src="{{image}}"height="150" >-->
+
+<!--</body>-->
+<!--</html>-->
+
+<div class="col-lg-6 col-sm-6">
+    <div class="card hovercard">
+        <div class="card-background">
+            <img class="card-bkimg" src="{{image}}" height="600"/>
+
+            <!-- http://lorempixel.com/850/280/people/9/ -->
+        </div>
+        <div class="useravatar">
+            <div class="row">
+                <div class="col-md-5">
+            <img alt="" src="{{image}}">
+                    <br><br>
+
+                </div>
+                <div class="col-md-7">
+                    <div class='grp' align="center" class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                    <button type="button" id="stars" class="btn btn-warning btn-lg"" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    <div class="hidden-xs">Posts</div>
+                    </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                    <button type="button" id="favorites" class="btn btn-success btn-lg"" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                    <a href="/profile/{{data.username}}/followers" STYLE="text-decoration: none;color:white;"><div class="hidden-xs">{{data.followers.length}} Followers</div></a>
+                    </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                    <button type="button" id="following" class="btn btn-primary btn-lg"" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <a href="/profile/{{data.username}}/following" STYLE="text-decoration: none;color:white;"><div class="hidden-xs">{{data.following.length}} Following</div></a>
+                    </button>
+                    </div>
+                        <br><br>
+                        <font size="6" color="white"><b>{{data.firstname}},{{data.age}},{{data.city}}</b></font>
+                        <br>
+                        <font size="6" color="white">@<i>{{data.username}}</i></font>
+                        <br>
+                        <font size="6" color="white">{{data.description}}</font>
+                        <br><br><br>
+                        {{#if isUser}}
+                        {{else}}
+                            {{#if isFollowing}}
+                                <form >
+                                    <input type ='submit' class="btn btn-lg btn-success" value="Following" disabled>
+                                </form>
+                            {{else}}
+                                <form action="/addFollower" method="post">
+                                    <input type ='submit' class="btn btn-lg btn-success" value="Follow">
+                                    <input type="hidden" name="followWho" value={{data.username}} />
+                                </form>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                </div>
+        </div>
+        </div>
+        <!--<div class="card-info"> <span class="card-title">{{data.username}}</span>-->
+
+        <!--</div>-->
+    </div>
+</div>
+<br>
+
+    <!--<div class='grp' align="center" class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">-->
+        <!--<div class="btn-group" role="group">-->
+            <!--<button type="button" id="stars" class="btn btn-warning btn-lg"" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                <!--<div class="hidden-xs">Posts</div>-->
+            <!--</button>-->
+        <!--</div>-->
+        <!--<div class="btn-group" role="group">-->
+            <!--<button type="button" id="favorites" class="btn btn-success btn-lg"" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>-->
+                <!--<div class="hidden-xs">{{data.followers.length}} Followers</div>-->
+            <!--</button>-->
+        <!--</div>-->
+        <!--<div class="btn-group" role="group">-->
+            <!--<button type="button" id="following" class="btn btn-primary btn-lg"" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                <!--<div class="hidden-xs">{{data.following.length}} Following</div>-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<br>
+
+<div class="container">
+    <h3 align="center">{{data.username}} uploads</h3>
+{{#each userPosts as |post|}}
+    <a href="/posts/{{post._id}}"><img src="{{post.image}}" height="300" width="300"/></a>
+{{/each}}
+</div>
 
 </body>
 </html>
+
+
+

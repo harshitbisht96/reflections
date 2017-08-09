@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Landing Page</title>
+    <title> Login</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
-    <link rel='stylesheet' href='../styles/main.css'>
+    <link rel='stylesheet' type="text/css" href='/main.css'>
+    <link rel='stylesheet' href='/homepage.css'>
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
 </head>
 <body>
-<nav  id='nav' class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav  id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a id='heading' class="navbar-brand" href="#">Reflection</a>
+    <a id='heading' class="navbar-brand"   href="#">PicBook</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -31,6 +32,8 @@
         </form>
     </div>
 </nav>
+<br>
+<p align="center"style="background-color:red;">{{message}}</p>
 <div class='container'>
     <div class='row'>
         <div class='col-md-8'>
@@ -40,7 +43,8 @@
                         <div class='inner'>
                             <div class='content'>
                                 <section >
-                                    <h3><section id='logo'>Share your day with your friends</section></h3><br>
+                                    <br><br>
+                                    <h3><section id='logo'>Share memories with others...</section></h3><br>
                                     <img class="img-fluid" src="http://mon.gov.ua/content/%D0%9D%D0%BE%D0%B2%D0%B8%D0%BD%D0%B8/2017/01/30/321232-30.01.2017.png" alt="" width="500" height='250'>
                                 </section>
                                 <!-- <section>
@@ -54,7 +58,8 @@
         </div>
 
         <div class='col-md-4'>
-            <h3 id='accountHeading'><b>Create an account </b></h3><br>
+            <h3 id='accountHeading'><b>Create an account </b></h3>
+            <i>Once you fill the following credentials login with them to access your account.</i><br><br>
             <form action="/users" method="POST" enctype="multipart/form-data" >
                 <div class='row'>
                     <div class='col-md-7'>
@@ -66,7 +71,7 @@
                 </div>
                 <div class='row'>
                     <div class='col-md-7'>
-                        <input type="text" name="age" id="age" placeholder="Age" required><br><br>
+                        <input type="number" name="age" id="age" placeholder="Age" required><br><br>
                     </div>
                     <div class='col-md-5'>
                         <input type="text" name="city" id="city" placeholder="City" required><br><br>
@@ -77,9 +82,19 @@
                         <input type="text" name="username" id="username" placeholder="username" required><br><br>
                     </div>
                     <div class='col-md-5'>
-                        <input type="file" name="avatar" required><br><br>
+                        <input type="password"  name="password" id="password"  placeholder="Password" required><br><br>
+
                     </div>
-                    <input type="password"  name="password" id="password"  placeholder="Password" required><br><br>
+                </div>
+                    <div class='row'>
+                        <div class='col-md-7'>
+                            Upload your profile image
+                        </div>
+                        <div class='col-md-5'>
+                            <input type="file" name="avatar" placeholder ='your image'required><br><br>
+
+                        </div>
+                    </div>
                     <textarea rows="4" cols="50" name="description" id="description" placeholder="A little descriptiton about yourself" required></textarea><br><br>
 
                 <input  align='center' type="submit" class="btn btn-success btn-lg btn-block" value="Create an account" >
