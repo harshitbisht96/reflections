@@ -2,21 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Users</title>
-
+    <title>Edit your profile</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <!--<link rel='stylesheet' href='/homepage.css'>-->
-    <link rel='stylesheet' href='/users.css'>
-<<<<<<< HEAD
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/login.js" charset="utf-8"></script>
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
-    <script src="/profilepage.js" charset="utf-8"></script>
-    <script src="/jquery-3.2.1.min.js" charset="utf-8"></script>
 </head>
 <body>
 <nav id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
@@ -31,7 +24,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/profile/all">Users</a>
             </li>
-<<<<<<< HEAD
             <li class="nav-item active">
                 <a class="nav-link "  href="/about">About</a>
             </li>
@@ -41,14 +33,6 @@
         <form action="/upload" method="POST" enctype="multipart/form-data"  onsubmit="return validateform()" class="navbar-form form-inline">
             <input class="form-control mr-sm-2" type="file" id="inputFile" name="avatar" required >
             <input class="form-control mr-sm-2" type="text" name="story" placeholder="Add a memory" >
-=======
-
-
-        </ul>
-        <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
-            <input class="form-control mr-sm-2" type="file"  name="avatar" >
-            <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
->>>>>>> 5434919c53998583315743a14392babaf008b54a
             <input  type="submit" class='btn btn-info' value="Share">
         </form>
         <ul class="navbar-nav mr-auto">
@@ -62,51 +46,81 @@
                 <a class="nav-link " href="/logout"></a>
             </li>
 
-
-
-
-
-
-
-
-
-
-
             <li class="nav-item">
                 <!--<a class="nav-link " href="/logout">Logout</a>-->
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/profile/{{currentUser}}"><img class="rounded-circle" src="{{userImage}}" height="25"/> {{currentUser}} <span class="sr-only">(current)</span></a>
             </li>
+
             <li class="nav-item active">
                 <a class="nav-link "  href="/logout">Logout</a>
             </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
         </ul>
 
     </div>
 </nav>
 <br>
-<div class="container">
-<<<<<<< HEAD
-    <br><br><br>
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
-{{#each data as |user|}}
-    <div class="bg">
-        <a href="/profile/{{user.username}}">
-        <img  src="{{user.image}}" height="300"/>
-        <div class="overlay">
-            <h2>Followers <b> <span>{{user.followers.length}}</span></b></h2>
-            <h2>Following <b><span>{{user.following.length}}</span></b> </h2>
+<!--<div align="center">-->
+<!--Share something-->
+<!--</div>-->
+<!--<form action="/upload" method="POST" enctype="multipart/form-data">-->
+<!--<input type="file"  name="avatar" ><br>-->
+<!--<input type="text" name="story"><br>-->
+<!--<input type="submit" value="Submit">-->
+<!--</form>-->
+<!--<hr/>-->
+<!--<img src="uploa‌​ds/avatar-1501541056‌​425.png">-->
+<br> <br> <br>
+<div class="container" align="center">
+<form action="/updateprofile" method="POST" enctype="multipart/form-data"  >
+    <div class='row'>
+
+        <div class='col-md-5'>
+            <b>First Name:</b> <input type="text" name="firstname" id="fname"  value={{firstname}} required ><br><br>
         </div>
-        </a>
+        <div class='col-md-5'>
+            <b>Last Name:</b> <input type="text" name="lastname" id="lname" value={{lastname}} required><br><br>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-5'>
+            <b>Age:</b> <input type="number" name="age" id="age" value={{age}} required><br><br>
+        </div>
+        <div class='col-md-5'>
+            <b>City:</b> <input type="text" name="city" id="city" value={{city}} required><br><br>
+        </div>
+    </div>
+    <!--<div class='row'>-->
+        <!--<div class='col-md-7'>-->
+            <!--<input type="text" name="username" id="username" placeholder="username" minlength="5" required><br><br>-->
+        <!--</div>-->
+        <!--<div class='col-md-5'>-->
+            <!--<input type="password"  name="password" id="password"  placeholder="Password" minlength="8" maxlength="14" required><br><br>-->
+
+        <!--</div>-->
+    <!--</div>-->
+    <div class='row'>
+        <div class='col-md-5'>
+           <b> Upload your profile image </b>
+        </div>
+        <div class='col-md-5'>
+            <input type="file" id="inputFile"  name="avatar" required><br><br>
+
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-2'>
+        </div>
+        <div class='col-md-5'>
+    <textarea rows="4" cols="50" minlength="8" name="description" id="description" placeholder="About yourself..." required></textarea><br><br>
+            <input  align='center' type="submit" class="btn btn-success" value="Update profile" >
+        </div>
     </div>
 
-{{/each}}
+
+</form>
 </div>
 </body>
 </html>

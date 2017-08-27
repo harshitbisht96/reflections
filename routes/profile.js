@@ -6,6 +6,11 @@ var db=require('../database.js');
 const express=require('express');
 const route=require('express').Router();
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
 route.get('/all', function (req, res) {
     res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     db.then(function (data) {
@@ -57,7 +62,11 @@ route.get('/:id', function (req, res) {
                 })
         }).then(function(){
             // console.log(userPosts.length)
+<<<<<<< HEAD
+                res.render('userprofile', {data: userdata,profileof:username, image: image, isFollowing: isFollowing,isUser:isUser,userPosts:userPosts,currentUser:req.user.username,userImage:req.user.image});
+=======
                 res.render('userprofile', {data: userdata, image: image, isFollowing: isFollowing,isUser:isUser,userPosts:userPosts,currentUser:req.user.username,userImage:req.user.image});
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
             })
 
 
@@ -96,6 +105,10 @@ route.get('/:id/following', function (req, res) {
 
     });
 });
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
 route.use('/',function(req,res){
     res.render("notfound");
 })

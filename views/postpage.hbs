@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>Postpage</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
+<<<<<<< HEAD
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/login.js" charset="utf-8"></script>
+    <script src="/js/login.js" charset="utf-8"></script>
+=======
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
 </head>
@@ -23,9 +30,15 @@
 
 
         </ul>
+<<<<<<< HEAD
+        <form action="/upload" method="POST" enctype="multipart/form-data"  onsubmit="return validateform()" class="navbar-form form-inline">
+            <input class="form-control mr-sm-2" type="file" id="inputFile" name="avatar" required >
+            <input class="form-control mr-sm-2" type="text" name="story" placeholder="Add a memory" >
+=======
         <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
             <input class="form-control mr-sm-2" type="file"  name="avatar" >
             <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
             <input  type="submit" class='btn btn-info' value="Share">
         </form>
         <ul class="navbar-nav mr-auto">
@@ -40,6 +53,8 @@
             </li>
 
 
+<<<<<<< HEAD
+=======
 
 
 
@@ -49,6 +64,7 @@
 
 
 
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
             <li class="nav-item">
                 <!--<a class="nav-link " href="/logout">Logout</a>-->
             </li>
@@ -63,6 +79,32 @@
     </div>
 </nav>
 <br>
+<<<<<<< HEAD
+<br><br><br>
+<div align="center">
+    <img  src= "{{data.image}}" height="400"  ><br><br>
+    {{numberOfLikes}} likes<br>
+    {{#if isLiked}}
+        <button class='btn btn-success' disabled>Liked</button>
+    {{else}}
+        <form action="/like" method="post">
+            <input type="hidden" name="postId" value={{data._id}} />
+            <input  type='submit' class='btn btn-success' value='Like'>
+        </form>
+    {{/if}}
+    <br>
+    <font size="5">{{data.story}}</font>
+    <hr/>
+    <form action="/comment" method="POST" >
+        <input  type="text" name="comment" placeholder="Comment here" size="40">
+        <input type="hidden" name="postId" value={{data._id}} />
+        <input class=" btn btn-info" type="submit" value="Add Comment">
+    </form>
+    <br>
+    {{#each commentsData as |comment|}}
+        <div class="well">
+            <font size="4"> <a href="/profile/{{comment.by}}">{{comment.by}} </a> {{comment.body}} </font>
+=======
 <div align="center">
 <img  src= "{{data.image}}" height="400"  ><br>
     <font size="5">{{data.story}}</font>
@@ -76,6 +118,7 @@
     {{#each commentsData as |comment|}}
         <div class="well">
            <font size="4"> <a href="/profile/{{comment.by}}">{{comment.by}} </a> {{comment.body}} </font>
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
         </div>
 
     {{/each}}

@@ -5,16 +5,40 @@
     <link rel='stylesheet' href='/css/bootstrap.css'>
     <link rel='stylesheet' type="text/css" href='/main.css'>
     <link rel='stylesheet' href='/homepage.css'>
+<<<<<<< HEAD
+    <script src="/login.js" charset="utf-8"></script>
+    <script src="/js/jquery.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js" charset="utf-8"></script>
+</head>
+<body>
+<nav  id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded" role="navigation">
+=======
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
 </head>
 <body>
 <nav  id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a id='heading' class="navbar-brand"   href="#">PicBook</a>
 
+<<<<<<< HEAD
+    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link btn btn-navbar" href="community.html"><i class="fa fa-users" aria-hidden="true"> </i><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link btn btn-navbar" href="posts.html"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="sr-only">(current)</span></a>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0 dropdown-toggle"   action="/login" method="post">
+=======
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -26,14 +50,23 @@
 
         </ul>
         <form class="form-inline my-2 my-lg-0"  action="/login" method="post">
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
             <input id='inputId' class="form-control mr-sm-2"  type="text" name="username" placeholder="username" required>
             <input id='inputPassword' class="form-control mr-sm-2" type="password" name="password" placeholder="password" required>
             <input type='submit' class="btn btn-success my-2 my-sm-0"  value='Log In'>
         </form>
     </div>
+<<<<<<< HEAD
+
+</nav>
+<br>
+<br><br><br>
+<p align="center" style="background-color:red;">{{message}}</p>
+=======
 </nav>
 <br>
 <p align="center"style="background-color:red;">{{message}}</p>
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
 <div class='container'>
     <div class='row'>
         <div class='col-md-8'>
@@ -60,7 +93,11 @@
         <div class='col-md-4'>
             <h3 id='accountHeading'><b>Create an account </b></h3>
             <i>Once you fill the following credentials login with them to access your account.</i><br><br>
+<<<<<<< HEAD
+            <form action="/users" method="POST" enctype="multipart/form-data" onsubmit=" return validateform()" >
+=======
             <form action="/users" method="POST" enctype="multipart/form-data" >
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
                 <div class='row'>
                     <div class='col-md-7'>
                         <input type="text" name="firstname" id="fname" placeholder="First Name" required><br><br>
@@ -79,10 +116,17 @@
                 </div>
                 <div class='row'>
                     <div class='col-md-7'>
+<<<<<<< HEAD
+                        <input type="text" name="username" id="username" placeholder="username" minlength="5" required><br><br>
+                    </div>
+                    <div class='col-md-5'>
+                        <input type="password"  name="password" id="password"  placeholder="Password" minlength="8" maxlength="14" required><br><br>
+=======
                         <input type="text" name="username" id="username" placeholder="username" required><br><br>
                     </div>
                     <div class='col-md-5'>
                         <input type="password"  name="password" id="password"  placeholder="Password" required><br><br>
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
 
                     </div>
                 </div>
@@ -91,11 +135,19 @@
                             Upload your profile image
                         </div>
                         <div class='col-md-5'>
+<<<<<<< HEAD
+                            <input type="file" id="inputFile"  name="avatar" placeholder ='your image'required><br><br>
+
+                        </div>
+                    </div>
+                    <textarea rows="4" cols="50" minlength="8" name="description" id="description" placeholder="About yourself..." required></textarea><br><br>
+=======
                             <input type="file" name="avatar" placeholder ='your image'required><br><br>
 
                         </div>
                     </div>
                     <textarea rows="4" cols="50" name="description" id="description" placeholder="A little descriptiton about yourself" required></textarea><br><br>
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
 
                 <input  align='center' type="submit" class="btn btn-success btn-lg btn-block" value="Create an account" >
 

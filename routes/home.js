@@ -48,6 +48,33 @@ const route=require('express').Router();
             })
         });
     });
+<<<<<<< HEAD
+route.get('/:id', function (req, res) {
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    db.then(function (data) {
+        var postId= req.params.id;
+        var imagesDb = data.collection('images');
+        var commentsDb=data.collection('comments');
+        var ObjectID=require('mongodb').ObjectID;
+        imagesDb.findOne({ _id : new ObjectID(postId)}).then(function (data) {
+            var numberOfLikes=data.likes.length;
+            var isLiked;
+            if (data.likes.indexOf(req.user.username)>-1)
+            {
+
+                isLiked=true;
+            }
+            else{
+                isLiked=false;
+            }
+            commentsDb.find({post:postId}).toArray().then(function(commentsData){
+                res.render('postpage',{data:data,commentsData:commentsData,currentUser:req.user.username,isLiked:isLiked,numberOfLikes:numberOfLikes});
+            })
+
+        })
+    });
+});
+=======
     route.get('/:id', function (req, res) {
         res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
         db.then(function (data) {
@@ -63,6 +90,7 @@ const route=require('express').Router();
             })
         });
     });
+>>>>>>> 5434919c53998583315743a14392babaf008b54a
 route.use('/',function(req,res){
     res.render("notfound");
 })

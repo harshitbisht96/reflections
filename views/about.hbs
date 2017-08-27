@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Following</title>
+    <title>About</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
-<<<<<<< HEAD
+    <link rel='stylesheet' type="text/css" href='/main.css'>
+    <link rel='stylesheet' href='/homepage.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
-    <!--<link rel='stylesheet' href='/homepage.css'>-->
+    <script src="/js/login.js" charset="utf-8"></script>
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
 </head>
 <body>
-<nav id='nav' class="navbar  fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded">
+<nav id='nav' class="navbar fixed-top navbar-inverse bg-inverse navbar-toggleable-md navbar-light bg-faded" >
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,18 +25,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/profile/all">Users</a>
             </li>
-<<<<<<< HEAD
             <li class="nav-item active">
                 <a class="nav-link "  href="/about">About</a>
             </li>
-=======
 
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 
         </ul>
-        <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
-            <input class="form-control mr-sm-2" type="file"  name="avatar" >
-            <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
+        <form action="/upload" method="POST" enctype="multipart/form-data"  onsubmit="return validateform()" class="navbar-form form-inline">
+            <input class="form-control mr-sm-2" type="file" id="inputFile" name="avatar" required >
+            <input class="form-control mr-sm-2" type="text" name="story" placeholder="Add a memory" >
             <input  type="submit" class='btn btn-info' value="Share">
         </form>
         <ul class="navbar-nav mr-auto">
@@ -51,46 +47,32 @@
                 <a class="nav-link " href="/logout"></a>
             </li>
 
-
-
-
-
-
-
-
-
-
-
             <li class="nav-item">
                 <!--<a class="nav-link " href="/logout">Logout</a>-->
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/profile/{{currentUser}}">{{currentUser}} <span class="sr-only">(current)</span></a>
-            </li>
+
+
             <li class="nav-item active">
                 <a class="nav-link "  href="/logout">Logout</a>
             </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
         </ul>
 
     </div>
 </nav>
 <br>
-<<<<<<< HEAD
 <br><br><br>
-<h2 align="center">Users followed by {{userName}}</h2>
-=======
-<h2 align="center">Users following {{userName}}</h2>
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 
-{{#each followingArray as |follow|}}
-    <p align="center">
-        <a href="/profile/{{follow}}">{{follow}}</a>
-        <br></p>
-{{/each}}
+<h3 align="center"><i>About PicBook</i></h3>
+<p align="center">PicBook is a photo sharing website where users can upload a memory and share it with other</p>
+
+<h4 align="center"><b>Here are the features of PicBook</b></h4>
+<ul align="center" style="list-style-type:none">
+    <li align="center">Upload Photots</li>
+    <li align="center">Follow those whose posts interests you</li>
+    <li align="center">Check profile of users of know about them</li>
+    <li align="center">Like and Comment on posts</li>
+</ul>
 
 </body>
 </html>
