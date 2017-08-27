@@ -5,12 +5,9 @@
     <title>Profile</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
     <link rel='stylesheet' href='/profilepage.css'>
-<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/login.js" charset="utf-8"></script>
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
     <script src="/profilepage.js" charset="utf-8"></script>
@@ -29,7 +26,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/profile/all">Users</a>
             </li>
-<<<<<<< HEAD
             <li class="nav-item active">
                 <a class="nav-link "  href="/about">About</a>
             </li>
@@ -39,14 +35,6 @@
         <form action="/upload" method="POST" enctype="multipart/form-data"  onsubmit="return validateform()" class="navbar-form form-inline">
             <input class="form-control mr-sm-2" type="file" id="inputFile" name="avatar" required >
             <input class="form-control mr-sm-2" type="text" name="story" placeholder="Add a memory" >
-=======
-
-
-        </ul>
-        <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
-            <input class="form-control mr-sm-2" type="file"  name="avatar" >
-            <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
->>>>>>> 5434919c53998583315743a14392babaf008b54a
             <input  type="submit" class='btn btn-info' value="Share">
         </form>
         <ul class="navbar-nav mr-auto">
@@ -79,10 +67,7 @@
             <li class="nav-item active">
                 <a class="nav-link "  href="/logout">Logout</a>
             </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
         </ul>
 
     </div>
@@ -107,11 +92,7 @@
 
 <!--</body>-->
 <!--</html>-->
-<<<<<<< HEAD
 <br> <br> <br>
-=======
-
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 <div class="col-lg-6 col-sm-6">
     <div class="card hovercard">
         <div class="card-background">
@@ -134,7 +115,6 @@
                     </button>
                     </div>
                     <div class="btn-group" role="group">
-<<<<<<< HEAD
                     <button type="button" id="favorites" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                     <a href="/profile/{{profileof}}/followers" STYLE="text-decoration: none;color:white;"><div class="hidden-xs">{{data.followers.length}} Followers</div></a>
                     </button>
@@ -142,15 +122,6 @@
                     <div class="btn-group" role="group">
                     <button type="button" id="following" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         <a href="/profile/{{profileof}}/following" STYLE="text-decoration: none;color:white;"><div class="hidden-xs">{{data.following.length}} Following</div></a>
-=======
-                    <button type="button" id="favorites" class="btn btn-success btn-lg"" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                    <a href="/profile/{{data.username}}/followers" STYLE="text-decoration: none;color:white;"><div class="hidden-xs">{{data.followers.length}} Followers</div></a>
-                    </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                    <button type="button" id="following" class="btn btn-primary btn-lg"" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        <a href="/profile/{{data.username}}/following" STYLE="text-decoration: none;color:white;"><div class="hidden-xs">{{data.following.length}} Following</div></a>
->>>>>>> 5434919c53998583315743a14392babaf008b54a
                     </button>
                     </div>
                         <br><br>
@@ -161,7 +132,6 @@
                         <font size="6" color="white">{{data.description}}</font>
                         <br><br><br>
                         {{#if isUser}}
-<<<<<<< HEAD
                             <form action="/editProfile" method="post">
                                 <input type ='submit' class="btn btn-lg btn-success" value="Edit Profile">
                                 <input type="hidden" name="firstname" value={{data.firstname}} />
@@ -170,8 +140,6 @@
                                 <input type="hidden" name="city" value={{data.city}} />
                                 <input type="hidden" name="description" value={{data.description}} />
                             </form>
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
                         {{else}}
                             {{#if isFollowing}}
                                 <form >

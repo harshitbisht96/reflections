@@ -1,7 +1,6 @@
 /**
  * Created by harshitbisht96 on 26/7/17.
  */
-<<<<<<< HEAD
 
 
 // const http = require('http');
@@ -9,8 +8,6 @@
 //     http.get('https://picbookapp.herokuapp.com');
 // },300000);
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 const express=require('express');
 const fs=require('fs');
 const path=require('path');
@@ -21,11 +18,7 @@ var hbs = require('hbs');
 var ejs = require('ejs');
 var db=require('./database.js');
 var flash = require('connect-flash');
-<<<<<<< HEAD
 var port = process.env.PORT || 8800;
-=======
-
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 var mongodb=require('mongodb');
 var MongoClient=mongodb.MongoClient;
 var url='mongodb://localhost:27017/imageDatabase';
@@ -45,13 +38,9 @@ const homeRoute=require('./routes/home');
 const loginRoute=require('./routes/login');
 const registerRoute=require('./routes/register');
 const passport=require('./passport')
-<<<<<<< HEAD
 const profileRoute=require('./routes/profile');
 const aboutRoute=require('./routes/about');
 // const editProfileRoute=require('./routes/editProfile');
-=======
-const profileRoute=require('./routes/profile')
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 // const usersRoute=require('./routes/users')
 app.use(flash());
 app.use(cp('somesecret'));
@@ -72,10 +61,7 @@ app.set('views', __dirname + '/views');
 app.use('/posts/',express.static(__dirname + '/userImages'));
 app.use('/posts/',express.static(__dirname + '/uploads'));
 app.use('/profile/',express.static(__dirname + '/userImages'));
-<<<<<<< HEAD
 app.use('/about',express.static(__dirname + '/userImages'));
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 app.use('/profile/',express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname + '/styles'));
@@ -87,33 +73,21 @@ app.use(express.static(__dirname + '/bootstrap'));
 
 
 
-<<<<<<< HEAD
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-=======
-
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 
 
 console.log(__dirname + '/uploads/');
 
 // const Grid=require('gridfs-stream');
 var file2upload,fileName,filePath;
-<<<<<<< HEAD
 var userImageFileName;
-=======
-var userImageFileName
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 // const db = new mongo.Db('gridDb', new mongo.Server("127.0.0.1", 27017));
 // const gfs = Grid(db, mongo);
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-<<<<<<< HEAD
 
         cb(null, './uploads/');
     },
@@ -138,16 +112,6 @@ var storage = multer.diskStorage({
         }
 
 
-=======
-        cb(null, './uploads/');
-    },
-    filename: function (req, file, cb) {
-        file2upload=file.originalname;
-        fileName=file.fieldname + '-' + Date.now()+'.'+file.mimetype.toString().split("/")[1];
-        cb(null, fileName);
-        filePath=path.join(__dirname,'uploads/');
-        filePath+=fileName;
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     }
 });
 var userImageStorage = multer.diskStorage({
@@ -155,7 +119,6 @@ var userImageStorage = multer.diskStorage({
         cb(null, './userImages/');
     },
     filename: function (req, file, cb) {
-<<<<<<< HEAD
         var actualFileType=file.mimetype.toString();
         console.log(actualFileType)
         if(actualFileType=='image/jpeg' || actualFileType=='image/png' || actualFileType=='image/jpg') {
@@ -165,13 +128,6 @@ var userImageStorage = multer.diskStorage({
             filePath = path.join(__dirname, 'userImages/');
             filePath += fileName;
         }
-=======
-        file2upload=file.originalname;
-        userImageFileName=file.fieldname + '-' + Date.now()+'.'+file.mimetype.toString().split("/")[1];
-        cb(null, userImageFileName);
-        filePath=path.join(__dirname,'userImages/');
-        filePath+=fileName;
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     }
 });
 filePath=path.join(__dirname,'uploads/');
@@ -212,11 +168,7 @@ app.get('/', function(req,res,next){
         next();
     }
 });
-<<<<<<< HEAD
 app.use('/about',checkLoggedIn,aboutRoute);
-=======
-
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 app.use('/',loginRoute);
 app.use('/profile/',checkLoggedIn,profileRoute)
 // app.use('/users',usersRoute);
@@ -226,10 +178,7 @@ app.get('/exists',function(req,res){
     res.send("Username not available.Please create an account under different username.");
 })
 app.post('/upload', function (req, res) {
-<<<<<<< HEAD
     console.log(req.body);
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     // console.log(req.body.avatar)
     // if(req.body.avatar==undefined)
     // {
@@ -237,10 +186,7 @@ app.post('/upload', function (req, res) {
     //    res.redirect('/posts');
     //    return;
     // }
-<<<<<<< HEAD
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     upload(req, res, function (err) {
 
         if (err) {
@@ -253,11 +199,7 @@ app.post('/upload', function (req, res) {
         db.then(function(data){
            var postStory=req.body.story;
             var imageCollection=data.collection('images');
-<<<<<<< HEAD
            imageCollection.insert({"image":fileName,"story":postStory,"postedBy":req.user.username,"postedByImage":req.user.image,"likes":[]}).then(function(){
-=======
-           imageCollection.insert({"image":fileName,"story":postStory,"postedBy":req.user.username,"postedByImage":req.user.image}).then(function(){
->>>>>>> 5434919c53998583315743a14392babaf008b54a
                 console.log("Success");
             })
         });
@@ -302,7 +244,6 @@ app.post('/users', function (req, res) {
 
 });
 
-<<<<<<< HEAD
 app.post('/updateprofile',function(req,res){
 
     uploadUserImage(req, res, function (err) {
@@ -350,8 +291,6 @@ app.post('/like',function(req,res){
 
 
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 app.post('/comment',function(req,res){
     // console.log(req.body.postId);
     // console.log(req.body.comment)
@@ -368,10 +307,7 @@ app.post('/comment',function(req,res){
     res.redirect('/posts/'+req.body.postId);
 });
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 //Problem in this part of the code
 app.post('/addFollower',function(req,res){
     db.then(function(data){
@@ -439,7 +375,6 @@ app.post('/login', passport.authenticate('local', {
         badRequestMessage : 'Missing username or password.',
         failureFlash: true
 
-<<<<<<< HEAD
     })
 
 );
@@ -452,11 +387,6 @@ app.post('/editProfile',function(req,res){
     console.log(description)
     res.render('editprofile',{firstname:firstname,lastname:lastname,age:age,city:city,description:description});
 })
-=======
-    }),
-
-);
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 
 app.get('/logout',function(req,res){
     req.session.destroy(function(err){
@@ -474,12 +404,7 @@ app.use('/',function(req,res){
 });
 // passport.authenticate('local', { failureFlash: 'Invalid username or password.' });
 // passport.authenticate('local', { successFlash: 'Welcome!' });
-<<<<<<< HEAD
 app.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);
-=======
-app.listen(1111,function(){
-    console.log("app running at http://localhost:1111");
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 });
 

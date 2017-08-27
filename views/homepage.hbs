@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel='stylesheet' href='/css/bootstrap.css'>
-<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--<link rel='stylesheet' href='/homepage.css'>-->
     <script src="/login.js" charset="utf-8"></script>
-=======
-    <!--<link rel='stylesheet' href='/homepage.css'>-->
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
     <style>
@@ -54,7 +50,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/profile/all">Users</a>
             </li>
-<<<<<<< HEAD
             <li class="nav-item active">
                 <a class="nav-link "  href="/about">About</a>
             </li>
@@ -63,13 +58,6 @@
         </ul>
         <form action="/upload" method="POST" enctype="multipart/form-data"  onsubmit="return validateform()" class="navbar-form form-inline">
             <input class="form-control mr-sm-2" type="file" id="inputFile" name="avatar" required >
-=======
-
-
-        </ul>
-        <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
-            <input class="form-control mr-sm-2" type="file"  name="avatar" required >
->>>>>>> 5434919c53998583315743a14392babaf008b54a
             <input class="form-control mr-sm-2" type="text" name="story" placeholder="Add a memory" >
             <input  type="submit" class='btn btn-info' value="Share">
         </form>
@@ -84,19 +72,6 @@
                 <a class="nav-link " href="/logout"></a>
             </li>
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
->>>>>>> 5434919c53998583315743a14392babaf008b54a
             <li class="nav-item">
                 <!--<a class="nav-link " href="/logout">Logout</a>-->
             </li>
@@ -107,10 +82,7 @@
             <li class="nav-item active">
                 <a class="nav-link "  href="/logout">Logout</a>
             </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
         </ul>
 
     </div>
@@ -126,14 +98,9 @@
 <!--</form>-->
 <!--<hr/>-->
 <!--<img src="uploa‌​ds/avatar-1501541056‌​425.png">-->
-<<<<<<< HEAD
 <br> <br> <br>
 {{#if havingFriends}}
 
-=======
-
-{{#if havingFriends}}
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     {{#each data as |post|}}
 
         <div class="gallery" align="center">
@@ -143,11 +110,7 @@
                         <a href="/profile/{{post.postedBy}}"> <img class="rounded-circle" src="/profile/{{post.postedByImage}}" height="75" ></a>
                     </div>
                     <div class="col-md-8">
-<<<<<<< HEAD
                         <font size="5"> <a href="/profile/{{post.postedBy}}" STYLE="text-decoration: none;">{{ post.postedBy }}</a></font>
-=======
-                        <font size="5"> <a href="/profile/{{post.postedBy}}">{{ post.postedBy }}</a></font>
->>>>>>> 5434919c53998583315743a14392babaf008b54a
                     </div>
                 </div>
             </div>
@@ -155,32 +118,20 @@
             <a href="/posts/{{post._id}}"><img  src= "{{post.image}}" width="550" ></a>
             <hr/>
             <font size="5"><div class="desc">{{ post.story }}</div></font>
-<<<<<<< HEAD
             <a href="/posts/{{post._id}}"STYLE="text-decoration: none;"  ><i>Comments</i></a>
-=======
-            <a href="/posts/{{post._id}}"><i>See the comments</i></a>
->>>>>>> 5434919c53998583315743a14392babaf008b54a
         </div>
 
     {{/each}}
 
 {{else}}
-<<<<<<< HEAD
 
-=======
-    <br>
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     <div class="container">
         <h2 align="center">It looks kind of lonely here in here.<br>
             &#9700 Click on the Users tab to see all the users .
             <br>Visit there profiles if you want to follow them.
             <br><p align="center">Add you memories here &#9650</p><p align="center">Happy Sharing :)</p>
             <img src="/happiness.jpg" />
-<<<<<<< HEAD
             <p align="center"><i>and a memory...</i></p>
-=======
-            <h2 align="center">and a memory...</h2>
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 
     </h2>
     </div>

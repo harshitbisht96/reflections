@@ -7,12 +7,9 @@
     <link rel='stylesheet' href='/css/bootstrap.css'>
     <!--<link rel='stylesheet' href='/homepage.css'>-->
     <link rel='stylesheet' href='/users.css'>
-<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/login.js" charset="utf-8"></script>
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js" charset="utf-8"></script>
     <script src="/profilepage.js" charset="utf-8"></script>
@@ -31,7 +28,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/profile/all">Users</a>
             </li>
-<<<<<<< HEAD
             <li class="nav-item active">
                 <a class="nav-link "  href="/about">About</a>
             </li>
@@ -41,14 +37,6 @@
         <form action="/upload" method="POST" enctype="multipart/form-data"  onsubmit="return validateform()" class="navbar-form form-inline">
             <input class="form-control mr-sm-2" type="file" id="inputFile" name="avatar" required >
             <input class="form-control mr-sm-2" type="text" name="story" placeholder="Add a memory" >
-=======
-
-
-        </ul>
-        <form action="/upload" method="POST" enctype="multipart/form-data" class="navbar-form form-inline">
-            <input class="form-control mr-sm-2" type="file"  name="avatar" >
-            <input class="form-control mr-sm-2" type="text" name="story" placeholder="whats your story?">
->>>>>>> 5434919c53998583315743a14392babaf008b54a
             <input  type="submit" class='btn btn-info' value="Share">
         </form>
         <ul class="navbar-nav mr-auto">
@@ -81,20 +69,14 @@
             <li class="nav-item active">
                 <a class="nav-link "  href="/logout">Logout</a>
             </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
         </ul>
 
     </div>
 </nav>
 <br>
 <div class="container">
-<<<<<<< HEAD
     <br><br><br>
-=======
->>>>>>> 5434919c53998583315743a14392babaf008b54a
 {{#each data as |user|}}
     <div class="bg">
         <a href="/profile/{{user.username}}">
